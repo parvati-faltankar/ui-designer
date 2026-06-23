@@ -14,6 +14,7 @@ import {
 export function useProjects() {
   const store = useProjectStore(
     useShallow((s) => ({
+      projects: s.projects,
       loading: s.loading,
       dialogOpen: s.dialogOpen,
       searchQuery: s.searchQuery,
@@ -22,6 +23,7 @@ export function useProjects() {
       fetchProjects: s.fetchProjects,
       createProject: s.createProject,
       deleteProject: s.deleteProject,
+      updateProject: s.updateProject,
       setDialogOpen: s.setDialogOpen,
       setSearchQuery: s.setSearchQuery,
       setStatusFilter: s.setStatusFilter,

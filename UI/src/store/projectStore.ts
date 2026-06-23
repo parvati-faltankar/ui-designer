@@ -26,6 +26,7 @@ interface ProjectStore {
   fetchProjects: () => Promise<void>;
   createProject: (payload: CreateProjectPayload) => Promise<void>;
   deleteProject: (id: string) => Promise<void>;
+  updateProject: (id: string, updates: Partial<Project>) => Promise<void>;
   setDialogOpen: (open: boolean) => void;
   setSearchQuery: (query: string) => void;
   setStatusFilter: (filter: string) => void;
@@ -78,6 +79,20 @@ export const useProjectStore = create<ProjectStore>()(
           get().showSnack(`"${name}" deleted.`, 'success');
         } catch {
           get().showSnack('Failed to delete project.', 'error');
+        }
+      },
+
+      updateProject: async (id, updates) => {
+        try {
+          const updated = await projectsApi.update(id, updates);
+          set(
+            (s) => ({ projects: s.projects.map((p) => (p._id === id ? updated : p)) }),
+            false,
+            'updateProject',
+          );
+          get().showSnack(`Project settings saved!`, 'success');
+        } catch {
+          get().showSnack('Failed to save project settings.', 'error');
         }
       },
 

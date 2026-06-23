@@ -21,8 +21,10 @@ app.use(express.json());
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
 const projectRoutes = require('./routes/projects');
+const pageRoutes = require('./routes/pages');
 
 app.use('/api/projects', projectRoutes);
+app.use('/api/pages', pageRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

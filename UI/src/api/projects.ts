@@ -20,4 +20,9 @@ export const projectsApi = {
   delete: async (id: string): Promise<void> => {
     await client.delete(`/projects/${id}`);
   },
+
+  update: async (id: string, payload: Partial<Project>): Promise<Project> => {
+    const { data } = await client.put<ApiResponse<Project>>(`/projects/${id}`, payload);
+    return data.data;
+  },
 };

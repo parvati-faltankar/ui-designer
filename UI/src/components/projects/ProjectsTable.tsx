@@ -14,8 +14,9 @@ import {
   Tooltip,
 } from '@mui/material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import type { Project, ProjectStatus } from '../../types/project';
+import { useNavigate } from 'react-router-dom';
 
 const STATUS_CONFIG: Record<ProjectStatus, { label: string; color: string; bg: string }> = {
   active: { label: 'Active', color: '#16A34A', bg: 'rgba(22, 163, 74, 0.1)' },
@@ -32,6 +33,7 @@ interface ProjectsTableProps {
 }
 
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ projects, onDelete }) => {
+  const navigate = useNavigate();
   return (
     <TableContainer
       component={Paper}
@@ -116,9 +118,9 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ projects, onDelete }) => 
                 </TableCell>
                 <TableCell align="right">
                   <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
-                    <Tooltip title="Open">
-                      <IconButton size="small" sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main', bgcolor: 'action.hover' } }}>
-                        <OpenInNewIcon fontSize="small" />
+                    <Tooltip title="Project Settings">
+                      <IconButton size="small" sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main', bgcolor: 'action.hover' } }} onClick={() => navigate(`/projects/${project._id}/settings`)}>
+                        <SettingsOutlinedIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Delete">

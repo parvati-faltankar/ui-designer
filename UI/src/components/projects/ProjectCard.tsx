@@ -11,8 +11,9 @@ import {
   Avatar,
 } from '@mui/material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import { useNavigate } from 'react-router-dom';
 import type { Project, ProjectStatus } from '../../types/project';
 
 // ─── Config ───────────────────────────────────────────────────────────────────
@@ -38,6 +39,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onDelete }) => {
   const status = STATUS_CONFIG[project.status];
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -127,16 +129,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onDelete }) => {
           borderColor: 'divider',
         }}
       >
-        <Tooltip title="Open project">
+        <Tooltip title="Project Settings">
           <IconButton
-            id={`project-open-${project._id}`}
+            id={`project-settings-${project._id}`}
             size="small"
+            onClick={(e) => { e.stopPropagation(); navigate(`/projects/${project._id}/settings`); }}
             sx={{
               color: 'text.secondary',
               '&:hover': { color: 'primary.main', background: 'rgba(124,58,237,0.08)' },
             }}
           >
-            <OpenInNewIcon fontSize="small" />
+            <SettingsOutlinedIcon fontSize="small" />
           </IconButton>
         </Tooltip>
         <Tooltip title="Delete project">

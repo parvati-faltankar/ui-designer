@@ -6,6 +6,7 @@ export interface Project {
   description: string;
   status: ProjectStatus;
   color: string;
+  themeTemplate: string;
   createdAt: string;
   updatedAt: string;
 }

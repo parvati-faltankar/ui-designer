@@ -45,4 +45,48 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// ─── GET /api/projects/:id ───────────────────────────────────────────────────
+// Get a single project by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+    if (!project) return res.status(404).json({ success: false, message: 'Project not found' });
+    res.json({ success: true, data: project });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ─── PUT /api/projects/:id ───────────────────────────────────────────────────
+// Update project details (including theme)
+router.put('/:id', async (req, res) => {
+  try {
+    const { name, description, color, status, themeTemplate } = req.body;
+    
+    // Create an update object, only updating provided fields
+    const updateData = {};
+    if (name !== undefined) updateData.name = name.trim();
+    if (description !== undefined) updateData.description = description.trim();
+    if (color !== undefined) updateData.color = color;
+    if (status !== undefined) updateData.status = status;
+    if (themeTemplate !== undefined) updateData.themeTemplate = themeTemplate;
+
+    if (updateData.name === '') {
+      return res.status(400).json({ success: false, message: 'Project name cannot be empty' });
+    }
+
+    const project = await Project.findByIdAndUpdate(
+      req.params.id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!project) return res.status(404).json({ success: false, message: 'Project not found' });
+    
+    res.json({ success: true, data: project });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+
 module.exports = router;

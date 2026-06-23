@@ -15,10 +15,8 @@ const sharedComponents = {
         boxShadow: 'none',
       },
       containedPrimary: {
-        background: 'linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)',
         '&:hover': {
-          background: 'linear-gradient(135deg, #9D5CF6 0%, #7C3AED 100%)',
-          boxShadow: '0 0 20px rgba(124,58,237,0.4)',
+          boxShadow: '0 0 20px rgba(0,0,0,0.2)',
         },
       },
     },
@@ -31,12 +29,10 @@ const sharedComponents = {
   MuiFab: {
     styleOverrides: {
       root: {
-        background: 'linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)',
-        boxShadow: '0 8px 25px rgba(124,58,237,0.4)',
+        boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
-          background: 'linear-gradient(135deg, #9D5CF6 0%, #7C3AED 100%)',
-          boxShadow: '0 12px 35px rgba(124,58,237,0.6)',
+          boxShadow: '0 12px 35px rgba(0,0,0,0.3)',
           transform: 'scale(1.05)',
         },
       },

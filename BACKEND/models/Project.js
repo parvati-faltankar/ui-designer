@@ -24,6 +24,10 @@ const projectSchema = new mongoose.Schema(
       type: String,
       default: '#7C3AED', // default violet accent
     },
+    themeTemplate: {
+      type: String,
+      default: 'enterprise-blue', // 'enterprise-blue', 'midnight-violet', 'forest-green', 'sunset-orange', 'monochrome'
+    },
   },
   {
     timestamps: true, // adds createdAt & updatedAt automatically
